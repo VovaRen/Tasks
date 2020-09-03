@@ -79,7 +79,7 @@ def palindrome(d):
     :param d: int
     :return palindrome: boolean
     """
-    return True if str(d) == str(d)[::-1] else False
+    return str(d) == str(d)[::-1]
 
 
 # E. Внутри
