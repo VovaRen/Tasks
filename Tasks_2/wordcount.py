@@ -58,8 +58,7 @@ def read_text(filename):
     with open(filename) as file:
         text = file.read()
     text = text.replace("\n", " ")
-    text_1 = text.translate(str.maketrans('', '', string.punctuation))
-    text = text_1.lower()
+    text_ = text.translate(str.maketrans('', '', string.punctuation)).lower()
     words = text.split()
     words.sort()
     words_set = set(words)
