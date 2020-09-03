@@ -65,7 +65,7 @@ def shift(s):
     :return shift: string
     """
     c = s.split()[-1]
-    return c + ' ' + ' '.join(s.split()[:-1])
+    return f"{c} {' '.join(s.split()[:-1])}"
 
 
 # D. Палиндром
@@ -98,7 +98,10 @@ def inside(s):
     """
     len_s = len(s.split())//2
     items = s.split()
-    return ' '.join(items[1:len_s] + [items[0], items[-1]] + items[len_s:-1])
+    first_half = items[1:len_s]
+    middle = [items[0], items[-1]]
+    second_half = items[len_s:-1]
+    return ' '.join(first_half + middle + second_half)
 
 
 # Простая функция test() используется в main() для вывода

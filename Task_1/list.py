@@ -87,11 +87,11 @@ def remove_adjacent(nums):
     :param nums: list
     :return s: list
     """
-    s = []
+    no_adjacent = []
     for x in range(len(nums)):
         if nums[x] != nums[x - 1] or x == 0:
-            s.append(nums[x])
-    return s
+            no_adjacent.append(nums[x])
+    return no_adjacent
 
 
 # Простая функция test() используется в main() для вывода

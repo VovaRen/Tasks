@@ -79,7 +79,7 @@ def mix_up(a, b):
     :param b: string
     :return mix_up: string
     """
-    return a.replace(a[0:2], b[0:2]) + ' ' + b.replace(b[0:2], a[0:2])
+    return f'{a.replace(a[0:2], b[0:2])} {b.replace(b[0:2], a[0:2])}'
 
 
 # E. Хорош
