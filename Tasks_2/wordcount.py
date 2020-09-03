@@ -59,8 +59,7 @@ def read_text(filename):
         text = file.read()
     text = text.replace("\n", " ")
     text_ = text.translate(str.maketrans('', '', string.punctuation)).lower()
-    words = text.split()
-    words.sort()
+    words = text.split().sort()  
     words_set = set(words)
     return words_set, words
 
@@ -88,15 +87,15 @@ def print_top(filename):
     """
     read_text(filename)
     top_values = {}
-    b = 0
+    ind = 0
     for i in words_set:
         words_in_list = words.count(i)
         top_values[i] = words_in_list
     sorted_keys = sorted(top_values.keys(), reverse=True)[:20]
     sorted_values = sorted(top_values.values(), reverse=True)[:20]
     for i in sorted_keys:
-        c = sorted_values[b]
-        b += 1
+        c = sorted_values[ind]
+        ind += 1
         print(i, ':', c)
 
 
