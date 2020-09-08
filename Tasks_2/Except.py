@@ -17,6 +17,7 @@ def sum_nums():
             print("Сумма введённых чисел: ", sum(list_input_nums))
     except ValueError:
         print('Введите только числа через пробел в кол-ве не больше 10!')
+        sum_nums()
 
 
 if __name__ == '__main__':

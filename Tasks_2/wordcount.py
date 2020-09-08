@@ -38,6 +38,7 @@ print_words(filename), которая подсчитывает, как част�
 import string
 import sys
 
+
 # +++ваш код+++
 # Определите и заполните функции print_words(filename) и print_top(filename).
 # Вы также можете написать вспомогательную функцию, которая читает файл,
@@ -58,8 +59,9 @@ def read_text(filename):
     with open(filename) as file:
         text = file.read()
     text = text.replace("\n", " ")
-    text_ = text.translate(str.maketrans('', '', string.punctuation)).lower()
-    words = text.split().sort()  
+    text = text.translate(str.maketrans('', '', string.punctuation)).lower()
+    words = text.split()
+    words.sort()
     words_set = set(words)
     return words_set, words
 
@@ -87,15 +89,15 @@ def print_top(filename):
     """
     read_text(filename)
     top_values = {}
-    ind = 0
+    b = 0
     for i in words_set:
         words_in_list = words.count(i)
         top_values[i] = words_in_list
     sorted_keys = sorted(top_values.keys(), reverse=True)[:20]
     sorted_values = sorted(top_values.values(), reverse=True)[:20]
     for i in sorted_keys:
-        c = sorted_values[ind]
-        ind += 1
+        c = sorted_values[b]
+        b += 1
         print(i, ':', c)
 
 
@@ -118,6 +120,7 @@ def main():
     else:
         print('unknown option: ' + option)
     sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

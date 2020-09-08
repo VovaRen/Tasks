@@ -10,41 +10,37 @@ def sum_dicts(dict_1, dict_2):
 
 
 # Б.Найти в списке словарей нужный словарь.
-def search_dict(list, dict):
+def search_dict(dicts_list, dict_in_list):
     """Функция ищет вхождение словаря
     в словарях, находящихся в списке.
-    :param list: list
-    :param dict: dict
+    :param dicts_list: list
+    :param dict_in_list: dict
     :return search_dict: str
     """
-    for x in list:
-        for item in x:
-            if item in dict and x[item] == dict[item]:
-                print('Словарь есть в списке')
-            else:
-                print ('Словаря нет в списке')
+    presence = 0
+    for element in dicts_list:
+        for item in element:
+            if item in dict_in_list and element[item] == dict_in_list[item]:
+                presence += 1
+            elif element == dicts_list:
+                presence += 1
+    return 'Словарь есть в списке' if presence != 0 and presence == len(dict_in_list) else 'Словаря нет в списке'
 
 
 # В.Найти сумму всех четных чисел ряда Фибоначи  < 4000000
-def sum_fib(lim):
+def sum_fib():
     """Возвращает сумму четных чисел
-    Фибоначчи < lim.
-    :param lim:
-    :return sum(x): int
+    Фибоначчи < 4000000.
+    :param:
+    :return sum_even: int
     """
-    fib =[0, 1]
-    ind = 1
-    max_even = 0
-    while max_even < lim:
-        ind += 1
-        z = fib[ind-2] + fib[ind-1]
-        if z < lim:
-            fib.append(z)
-            even_nums = [i for i in fib if i%2 == 0]
-            max_even = max(even_nums)
-        else:
-            break
-    return sum(even_nums)
+    sum_even = 0
+    fib_1, fib_2 = 1, 0
+    while fib_2 <= 4000000:
+        if fib_2 % 2 == 0:
+            sum_even += fib_2
+        fib_1, fib_2 = fib_2, fib_1 + fib_2
+    return sum_even
 
 
 def test(got, expected):
@@ -61,14 +57,15 @@ def main():
 
     print()
     print('Наличие словаря в списке:')
-    test(search_dict([{'EDType': 'C101', 'a': 2}, {'EDType': 'C102', 'b': 3}], {'EDType': 'C101'}), 'Словарь есть в списке')
-    test(search_dict([{'EDType': 'C101', 'a': 2}, {'EDType': 'C102', 'b': 3}], {'EDType': 'C103'}), 'Словаря нет в списке')
+    test(search_dict([{'EDType': 'C101', 'a': 2}, {'EDType': 'C102', 'b': 3}], {'EDType': 'C101', 'b': 3}),
+         'Словарь есть в списке')
+    test(search_dict([{'EDType': 'C101', 'a': 2}, {'EDType': 'C102', 'b': 3}], {'EDTyp': 'C103', 'EDType': 'C101'}),
+         'Словаря нет в списке')
 
     print()
     print('Сумма четных Фибоначчи:')
-    test(sum_fib(4000000), 4613732)
+    test(sum_fib(), 4613732)
+
 
 if __name__ == '__main__':
     main()
-
-
