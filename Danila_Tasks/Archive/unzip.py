@@ -22,7 +22,7 @@ def files_in_zip():
     for root, dirs, files in os.walk(path_arch):
         for f in files:
             files_list.append(f.split('.')[0])
-    for r, d, f in os.walk('C:\\1'):
+    for r, d, f in os.walk(path_arch):
         for dirs in d:
             dirs_list.append(dirs)
     print(dirs_list + files_list)
