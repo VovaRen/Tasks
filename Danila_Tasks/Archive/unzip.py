@@ -18,8 +18,7 @@ def unzip():
     """Функция распаковывает архив на диск С.
     Если каталог не существует, то создаёт его.
     """
-    fantasy_zip = rarfile.RarFile('C:\\Users\\de\\PyCharmProjects\\'
-                                  'Exception\\venv\\Archive\\1.rar')
+    fantasy_zip = rarfile.RarFile(os.getcwd())
     fantasy_zip.extractall(path_unzip)
 
 
