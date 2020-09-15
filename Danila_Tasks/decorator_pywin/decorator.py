@@ -43,10 +43,7 @@ def time_difference():
 
 
 def factor():
-    factorials = []
-    for num in range(100, 200):
-        factorials.append(math.factorial(num))
-    return factorials
+    return [math.factorial(num) for num in range(100, 200)]
 
 
 def writing(file_name, text):
