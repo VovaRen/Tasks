@@ -3,6 +3,7 @@ import threading
 import math
 import os
 from multiprocessing import Process
+from functools import partial
 from Danila_Tasks.decorator_pywin.steps import PyWin
 
 
@@ -21,21 +22,20 @@ def func_time(func):
 
 @func_time
 def multi_thread(*func):
-    def info(_):
-        if func[-1] == 'multi':
-            for x in func[-1]:
-                process_multi = Process(target=x())
-                process_multi.start()
-        if func[-1] == 'thread':
-            for x in func[-1]:
-                process_thread = threading.Thread(target=x())
-                process_thread.start()
-    return info
+    if func[-1] == 'multi':
+        for x in func[:-1]:
+            process_multi = Process(target=x)
+            process_multi.start()
+    if func[-1] == 'thread':
+        for x in func[:-1]:
+            process_thread = threading.Thread(target=x)
+            process_thread.start()
 
 
 def time_difference():
     multi = times.setdefault('multi')
     thread = times.setdefault('thread')
+    print(times)
     if multi > thread:
         print(f'Мультипроцесс работает быстрее на {multi - thread}')
     if thread > multi:
@@ -43,8 +43,10 @@ def time_difference():
 
 
 def factor():
+    factorials = []
     for num in range(100, 200):
-        return math.factorial(num)
+        factorials.append(math.factorial(num))
+    return factorials
 
 
 def writing(file_name, text):
@@ -53,8 +55,8 @@ def writing(file_name, text):
 
 
 def main():
-    multi_thread(factor(), writing('text_file', 'heart'), 'multi')
-    multi_thread(factor(), writing('text_file', 'stone'), 'thread')
+    multi_thread(partial(factor), partial(writing, 'text_file', 'heart'), 'multi')
+    multi_thread(partial(factor), partial(writing, 'text_file', 'heart'), 'thread')
     time_difference()
     win.open_app(r'C:\Program Files (x86)\WinRAR\WinRAR.exe')
     win.set_window('WinRAR')
