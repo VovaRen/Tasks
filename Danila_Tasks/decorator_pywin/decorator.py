@@ -26,10 +26,12 @@ def multi_thread(*func):
         for x in func[:-1]:
             process_multi = Process(target=x)
             process_multi.start()
+            process_multi.join()
     if func[-1] == 'thread':
         for x in func[:-1]:
             process_thread = threading.Thread(target=x)
             process_thread.start()
+            process_thread.join()
 
 
 def time_difference():
@@ -43,7 +45,7 @@ def time_difference():
 
 
 def factor():
-    return [math.factorial(num) for num in range(100, 200)]
+    return [math.factorial(num) for num in range(100, 5000)]
 
 
 def writing(file_name, text):
@@ -55,13 +57,13 @@ def main():
     multi_thread(partial(factor), partial(writing, 'text_file', 'heart'), 'multi')
     multi_thread(partial(factor), partial(writing, 'text_file', 'heart'), 'thread')
     time_difference()
-    win.open_app(r'C:\Program Files (x86)\WinRAR\WinRAR.exe')
-    win.set_window('WinRAR')
-    win.click('ToolbarДобавить')
-    win.set_window()
-    win.select_tab_element('TabControl', 'Файлы')
-    win.input_path('Добавляемые &файлы:Edit2', os.getcwd() + r'\*.txt')
-    win.click('ОК')
+    # win.open_app(r'C:\Program Files (x86)\WinRAR\WinRAR.exe')
+    # win.set_window('WinRAR')
+    # win.click('ToolbarДобавить')
+    # win.set_window()
+    # win.select_tab_element('TabControl', 'Файлы')
+    # win.input_path('Добавляемые &файлы:Edit2', os.getcwd() + r'\*.txt')
+    # win.click('ОК')
 
 
 if __name__ == '__main__':
