@@ -15,6 +15,8 @@ def sum_nums():
         list_input_nums = [float(i) for i in input_nums.split(' ')]
         if len(list_input_nums) < 11:
             print("Сумма введённых чисел: ", sum(list_input_nums))
+        else:
+            raise ValueError
     except ValueError:
         print('Введите только числа через пробел в кол-ве не больше 10!')
         sum_nums()
