@@ -38,6 +38,9 @@ print_words(filename), которая подсчитывает, как част�
 import string
 import sys
 
+WORDS_IN_TEXT = []
+ALL_WORDS = []
+
 
 # +++ваш код+++
 # Определите и заполните функции print_words(filename) и print_top(filename).
@@ -54,16 +57,16 @@ def read_text(filename):
     :return words_set: set
     :return words: list
     """
-    global words_set
-    global words
+    global WORDS_IN_TEXT
+    global ALL_WORDS
     with open(filename) as file:
         text = file.read()
     text = text.replace("\n", " ")
     text = text.translate(str.maketrans('', '', string.punctuation)).lower()
-    words = text.split()
-    words.sort()
-    words_set = set(words)
-    return words_set, words
+    ALL_WORDS = text.split()
+    ALL_WORDS.sort()
+    WORDS_IN_TEXT = set(ALL_WORDS)
+    return WORDS_IN_TEXT, ALL_WORDS
 
 
 def print_words(filename):
@@ -74,8 +77,8 @@ def print_words(filename):
     :return:
     """
     read_text(filename)
-    for i in words_set:
-        words_in_list = words.count(i)
+    for i in WORDS_IN_TEXT:
+        words_in_list = ALL_WORDS.count(i)
         print(f'{i}: {words_in_list}')
 
 
@@ -89,16 +92,13 @@ def print_top(filename):
     """
     read_text(filename)
     top_values = {}
-    b = 0
-    for i in words_set:
-        words_in_list = words.count(i)
+    for i in WORDS_IN_TEXT:
+        words_in_list = ALL_WORDS.count(i)
         top_values[i] = words_in_list
-    sorted_keys = sorted(top_values.keys(), reverse=True)[:20]
-    sorted_values = sorted(top_values.values(), reverse=True)[:20]
-    for i in sorted_keys:
-        c = sorted_values[b]
-        b += 1
-        print(i, ':', c)
+    items_top_values = list(top_values.items())
+    items_top_values.sort(key=lambda x: x[1], reverse=True)
+    for i in items_top_values[:20]:
+        print(i[0], ':', i[1])
 
 
 ###
