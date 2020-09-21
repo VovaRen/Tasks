@@ -19,12 +19,12 @@ def search_dict(dicts_list, dict_in_list):
     """
     presence = 0
     for element in dicts_list:
-        for item in element:
-            if item in dict_in_list and element[item] == dict_in_list[item]:
-                presence += 1
-            elif element == dicts_list:
-                presence += 1
-    return 'Словарь есть в списке' if presence != 0 and presence == len(dict_in_list) else 'Словаря нет в списке'
+        if element == dict_in_list:
+            presence += 1
+    if presence > 0:
+        return 'Словарь есть в списке'
+    else:
+        return 'Словаря нет в списке'
 
 
 # В.Найти сумму всех четных чисел ряда Фибоначи  < 4000000
@@ -35,11 +35,12 @@ def sum_fib():
     :return sum_even: int
     """
     sum_even = 0
-    fib_1, fib_2 = 1, 0
-    while fib_2 <= 4000000:
-        if fib_2 % 2 == 0:
-            sum_even += fib_2
+    fib_1, fib_2 = 0, 1
+    while fib_1 <= 4000000:
         fib_1, fib_2 = fib_2, fib_1 + fib_2
+        if fib_1 % 2:
+            continue
+        sum_even += fib_1
     return sum_even
 
 
@@ -57,7 +58,7 @@ def main():
 
     print()
     print('Наличие словаря в списке:')
-    test(search_dict([{'EDType': 'C101', 'a': 2}, {'EDType': 'C102', 'b': 3}], {'EDType': 'C101', 'b': 3}),
+    test(search_dict([{'EDType': 'C101', 'a': 2}, {'EDType': 'C102', 'b': 3}], {'EDType': 'C102', 'b': 3}),
          'Словарь есть в списке')
     test(search_dict([{'EDType': 'C101', 'a': 2}, {'EDType': 'C102', 'b': 3}], {'EDTyp': 'C103', 'EDType': 'C101'}),
          'Словаря нет в списке')
